@@ -8,7 +8,7 @@ const querys = ["", "?q=is:pr+is:closed"]
 
 const msgReg = /(\d+)[\-\_\s]/;
 
-const keywords = /三/;
+const keywords = /四/;
 
 const promiseTeamTexts = teams.map((abc, scope) => {
     let promisePair = querys.map(q => {
