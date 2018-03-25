@@ -8,7 +8,7 @@ const querys = ["", "?q=is:pr+is:closed"]
 
 const msgReg = /(\d+)[\-\_\s]/;
 
-const keywords = /三/;
+const keywords = /[四|lesson\s4|lesson4]/;
 
 const promiseTeamTexts = teams.map((abc, scope) => {
     let promisePair = querys.map(q => {
@@ -26,8 +26,9 @@ const promiseTeamTexts = teams.map((abc, scope) => {
             .map((_,node) => {
                 const text = $(node).text().trim();
                 const matched = text.match(msgReg);
+                const finished = keywords.test(text)
     
-                if(matched) {
+                if(matched && finished) {
                     const id = parseInt(matched[1]);
                     const start = scope + 1;
                     const end = start * 10;
@@ -51,7 +52,7 @@ Promise.all(promiseTeamTexts).then(TeamTexts => {
     
     // console.log(TeamTexts)
     console.log(`==============`)
-    console.log(`截止到${(new Date()).toLocaleString()}，已交作业同学如下：`)
+    console.log(`截止到${(new Date()).toLocaleString()}，第四已交作业同学如下：`)
     console.log(TeamTexts.map((texts,index)=> teams[index]+ "-"+ texts.length + ": " + texts.join(' ， ')))
     console.log(`==============`)
 
